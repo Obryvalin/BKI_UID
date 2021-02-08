@@ -1,0 +1,103 @@
+<html>
+
+<head>
+    <title>UUID</title>
+    <script src="UUIDGen.js"></script>
+    <link rel="stylesheet" href="obrStyle.css">
+    <script type="text/javascript">
+        function tabOpen(event, tabName) {
+            var i, tabContent, tabItems;
+            tabContent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].style.display = "none";
+            }
+            tabItems = document.getElementsByClassName("tab-item");
+            for (i = 0; i < tabItems.length; i++) {
+                tabItems[i].className = tabItems[i].className.replace(" tab-active", "");
+            }
+
+            document.querySelector("#" + tabName).style.display = "block";
+            event.currentTarget.className += " tab-active";
+        }
+
+        function generateManyUUIDs(cnt) {
+            let i;
+            console.log("Generating " + cnt + " ids...");
+            var result = document.querySelector('#genResult');
+            result.innerHTML = "";
+
+            for (i = 0; i < parseInt(cnt); i++) {
+                result.innerHTML += "<p>" + UUIDGen() + "</p>";
+            }
+        }
+
+        function exportCSV() {
+            var csv = document.querySelector("#genResult").innerHTML;
+            csv = csv.replace(/<p>/gi, "");
+            csv = csv.replace(/<\/p>/gi, "\n");
+            var csvFile = new Blob([csv], { type: "text/csv" });
+            var downloadLink = document.createElement("a");
+            downloadLink.download = "UUID_export.csv";
+            downloadLink.href = window.URL.createObjectURL(csvFile);
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+        }
+
+        function addToUUID(UUID) {
+            let i;
+            console.log("Adding to " + UUID);
+            var result = document.querySelector('#addResult');
+            result.innerHTML = "<p>" + UUIDAdd(UUID) + "</p>";
+        }
+        function checkUUID(UUID) {
+            let i;
+            console.log("Checking " + UUID);
+            var result = document.querySelector('#checkResult');
+            result.innerHTML = "<p>" + UUIDCheck(UUID) + "</p>";
+        }
+    </script>
+</head>
+
+<body>
+    <header>Генератор УИД</header>
+    <div id="tab">
+        <button class="tab-item" onClick="tabOpen(event,'tabGen');">Создать</button>
+        <button class="tab-item" onClick="tabOpen(event,'tabAdd');">Добавить</button>
+        <button class="tab-item" onClick="tabOpen(event,'tabCheck');">Проверить</button>
+    </div>
+
+    <div id="tabGen" class="tabcontent">
+        <form id="genForm">
+            <div>
+                <input id="genInput" placeholder="Количество" />
+                <button class="button" id="genButton" type="button"
+                    onClick="generateManyUUIDs(document.querySelector('#genInput').value);">Создать</BUTTON>
+                <button class="button" id="genExport" type="button" onClick="exportCSV();">Экспорт</BUTTON>
+            </div>
+        </form>
+        <div id="genResult"></div>
+    </div>
+    <div id="tabAdd" class="tabcontent">
+        <form id="addForm">
+            <div>
+                <input id="addInput" placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" />
+                <button class="button" id="addButton" type="button"
+                    onClick="addToUUID(document.querySelector('#addInput').value);">Добавть</BUTTON>
+            </div>
+        </form>
+        <div id="AddResult"></div>
+    </div>
+    <div id="tabCheck" class="tabcontent">
+        <form id="checkForm">
+            <div>
+                <input id="checkInput" placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX-X" />
+                <button class="button" id="checkButton" type="button"
+                    onClick="checkUUID(document.querySelector('#checkInput').value);">Провериь</BUTTON>
+            </div>
+        </form>
+        <div id="checkResult"></div>
+    </div>
+</body>
+
+</html>

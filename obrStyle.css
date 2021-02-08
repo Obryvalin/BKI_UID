@@ -1,0 +1,65 @@
+
+body{
+    font-family: "Segoe UI",Arial,sans-serif;
+}
+header {
+    font: 40px bold;
+    font-family: "Segoe UI",Arial,sans-serif;
+    margin: 15px;
+}
+p {
+    font:12px monospace; margin:5px;
+}
+
+.tab {
+    overflow:hidden;
+    border:1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.tab-item{
+    background-color:inherit;
+    float:center;
+    border:none;
+    outline:none;
+    padding:14px 16px;
+    transition:0.2s;
+    font-size:16px;
+    border-bottom:2px solid #eee;
+}
+
+.tab-item:hover{
+    border-bottom:2px solid #888;
+}
+
+.tab-active{
+    border-bottom:2px solid #888;
+}
+.tabcontent{
+    display:none;
+    padding:6px 12px;
+    transition:0.2s;
+}
+
+input{
+    margin:5px;
+    display:block;
+    height:40px;
+    width: 500px;
+    box-shadow: inset 0 -3px 0 0 rgba(0,0,0,0.15);
+    font-size: 18px;
+    padding: 0 14px;
+}
+
+.button{
+    margin:5px;
+    display:block;
+    text-align:center;
+    border:none;
+    height:40px;
+    padding: 0 14px;
+    box-shadow: inset 0 -3px 0 0 rgba(0,0,0,0.15);
+    font-size: 18px;
+    background-color:#ccc;
+    line-height: 37px;  
+}
